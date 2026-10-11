@@ -244,21 +244,60 @@ I think based on the question you stated in our GA3, we do not commit them becau
 
 ### 21: Explore the MultiQC report
 
-*Answer* (one insight you gained):
+*Answer* (one insight you gained): I find it fascinating that I am able to view the QC results in different ways and easy to understand. For example, my favorite is the violin plot where I can view summary quickly on the number of samples and their overall summary. When I hover on the plot I can see each dot represents a sample and their dups and GC score. Another thing at the bottom is to know which sequence is over-represented, like the top one was "**NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" and it was found in 22 reports.** These info are very helpful to know the data by looking at the collective summary at once.
 
-*Answer* (one thing you're confused about):
+*Answer* (one thing you're confused about): I am still unsure on how to read some of those results. For instance, Per Base Sequence Content, is a confusing graph and I read its instructions but not 100% confident that I understand it, and its use (like when will we need to know the percent of each amino acid in bp?).
 
 ### 22: Pandoc versions
 
 ``` bash
-# Your command:
+# Your command: 
+ pandoc -v
 ```
 
 The output of the command(s) was:
 
 ```         
+pandoc 2.14.0.3
 ```
 
-*Answer*: Is the Pandoc version available by default the most recent one?
+*Answer*: Is the Pandoc version available by default the most recent one? No. Based on this website (<https://pandoc.org/releases.html>) There is a newer one that goes by "pandoc 3.12.1 (2026-10-07)", which was released last week. In this version they added an additional format, "New input and output format: `fodt"` .
 
 *Answer*: Which Pandoc version are you using after loading the module?
+
+Just like in class w6b, we can use the following commands to check modules:
+
+Class w6b: "`module spider` lists all modules."
+
+```{bash}
+# to list all modules 
+module spider pandoc
+
+# To load the latest available one 
+module load pandoc/3.6.4  
+
+# To check the loaded one is the correct version we wanted 
+pandoc -v
+```
+
+The outputs:
+
+``` bash
+  pandoc:
+     Versions:
+        pandoc/2.19.2
+        pandoc/3.6.4
+        
+(base) [alhamadn@p0840 alhamadn.1]$ module load pandoc/3.6.4  
+(base) [alhamadn@p0840 alhamadn.1]$ pandoc -v
+pandoc 3.6.4
+Features: +server +lua
+Scripting engine: Lua 5.4
+User data directory: /users/PAS1212/alhamadn/.local/share/pandoc
+Copyright (C) 2006-2024 John MacFarlane. Web: https://pandoc.org
+This is free software; see the source for copying conditions. There is no
+warranty, not even for merchantability or fitness for a particular purpose.
+(base) [alhamadn@p0840 alhamadn.1]$ 
+```
+
+However, this version is not the same as the one we found in the internet. I guess there might be so delay until osc adapt the new releases.
