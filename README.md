@@ -1,17 +1,4 @@
-<!--
-GA3 README template.
-- Add your answers to each question's section below.
-- For each question where we want you to add your commands,
-  put the command(s) you ran in the terminal in the corresponding ```bash code block.
-- Where we want to see a command's output, there is a plain ``` code block
-  right below the command block: paste the output there.
-- You don't need to paste the contents of your scripts into this file:
-  we will look at the scripts in your `scripts` dir directly
-  (so make sure you commit them!).
-- Delete instructional comments like this one as you go.
--->
-
-# GA3 answers - <your-name>
+# GA3 answers - Mohammed Alhamadn
 
 ------------------------------------------------------------------------
 
@@ -37,53 +24,74 @@ GA3 README template.
 
 <!-- No need to paste the script: we'll look at scripts/echo.sh directly. -->
 
-*Answer* (prediction and reasoning for `bash scripts/echo.sh Oct07 Oct08`):
+*Answer* (prediction and reasoning for `bash scripts/echo.sh Oct07 Oct08`): I think it will print Oct07 and Oct08 only because we assigned these two to the numbers
 
-*Answer* (prediction and reasoning for `bash scripts/echo.sh Oct07 Oct08 Oct09 Oct10`):
+*Answer* (prediction and reasoning for `bash scripts/echo.sh Oct07 Oct08 Oct09 Oct10`): i think it will print oct7-oct9 but ignore oct10 because its not assigned
 
-*Answer* (prediction and reasoning for `bash scripts/echo.sh Oct07 Oct08 "Oct09 Oct10"`):
+*Answer* (prediction and reasoning for `bash scripts/echo.sh Oct07 Oct08 "Oct09 Oct10"`): it will print oct07 for 1, oct09 for 2, and both Oct9-10 for 3.
 
-*Answer* (prediction and reasoning for `bash scripts/echo.sh results/fastqc/*.html`):
+*Answer* (prediction and reasoning for `bash scripts/echo.sh results/fastqc/*.html`): i am unsure, possibly run files that has names 1-2-3?
 
 ### 5: Run `echo.sh` and compare with your predictions
 
-```bash
+``` bash
 bash scripts/echo.sh Oct07 Oct08
 ```
 
 The output of the command was:
 
 ```         
+(base) [alhamadn@p0220 GA3]$ bash scripts/echo.sh Oct07 Oct08
+Oct07
+Oct08
+scripts/echo.sh: line 6: $3: unbound variable
 ```
 
-```bash
+``` bash
 bash scripts/echo.sh Oct07 Oct08 Oct09 Oct10
 ```
 
 The output of the command was:
 
 ```         
+(base) [alhamadn@p0220 GA3]$ bash scripts/echo.sh Oct07 Oct08 Oct09 Oct10
+Oct07
+Oct08
+Oct09
+Finished
 ```
 
-```bash
+``` bash
 bash scripts/echo.sh Oct07 Oct08 "Oct09 Oct10"
 ```
 
 The output of the command was:
 
 ```         
+(base) [alhamadn@p0220 GA3]$ bash scripts/echo.sh Oct07 Oct08 "Oct09 Oct10"
+Oct07
+Oct08
+Oct09 Oct10
+Finished
 ```
 
-```bash
+``` bash
 bash scripts/echo.sh results/fastqc/*.html
 ```
 
 The output of the command was:
 
 ```         
+(base) [alhamadn@p0220 GA3]$ bash scripts/echo.sh results/fastqc/*.html
+results/fastqc/S63_R1_fastqc.html
+results/fastqc/S63_R2_fastqc.html
+results/fastqc/S64_R1_fastqc.html
+Finished
 ```
 
 *Answer*: Which output (if any) differed from your prediction, and why?
+
+My first three predictions were correct. However, the fourth prediction was wrong for me. I forgot that assigning variables will be in order, so it went to the file and assigned the files to the variables that end with html in order. Which started with S63 forward and reverse, and only forward for 64.
 
 ### 6: Write the `printline.sh` script
 
@@ -93,24 +101,30 @@ The output of the command was:
 
 Test 1:
 
-```bash
-# Your command:
+``` bash
+# Your command: to print line 6 of metadata 
+bash scripts/printline.sh data/metadata.tsv 6
 ```
 
 The output of the command was:
 
 ```         
+S78     10dpi   control
 ```
 
 Test 2 (with redirection), and checking the contents of the output file:
 
-```bash
-# Your command:
+``` bash
+# Your command: to print line 12 in metadata and like we did in first few weeks (cant remember which class), is to use `>` to echo results there 
+bash scripts/printline.sh data/metadata.tsv 12 > results/line12.txt 
 ```
 
 The output of the command that checks the file contents was:
 
 ```         
+No output happened in terminal since we redirected the results to that file. However I opened that file and saw this results:
+
+S85	10dpi	relictum
 ```
 
 ------------------------------------------------------------------------
@@ -119,22 +133,24 @@ The output of the command that checks the file contents was:
 
 ### 8: Get a MultiQC container link
 
-*Answer*: The container link (URI) is:
+*Answer*: The container link (URI) is: [oras://community.wave.seqera.io/library/multiqc:1.35--562c547b518ebe20](oras://community.wave.seqera.io/library/multiqc:1.35--562c547b518ebe20)
 
 ### 9: MultiQC's help info, and the MultiQC command
 
 Code to run `multiqc --help` with the container:
 
-```bash
-# Your command:
+``` bash
+# Your command: Like we did in class w6b, we follow the steps to get a link container for the latest multiqc, which we found its v1.35
+apptainer exec oras://community.wave.seqera.io/library/multiqc:1.35--562c547b518ebe20 \multiqc --help
 ```
 
 <!-- You don't need to paste the MultiQC help output -->
 
 The MultiQC command to run MultiQC on `results/fastqc` with output in `results/multiqc`:
 
-```bash
-# Your command:
+``` bash
+# Your command: Similar to the class exmple, here the tool stating we can do multiqc with option and analysis directory. Main options like --outdir or short -o to create report in the specified output dir as text. 
+apptainer exec oras://community.wave.seqera.io/library/multiqc:1.35--562c547b518ebe20 \multiqc results/fastqc -o results/multiqc
 ```
 
 ### 10: Write the `multiqc.sh` script
@@ -145,15 +161,16 @@ The MultiQC command to run MultiQC on `results/fastqc` with output in `results/m
 
 Code to run the script:
 
-```bash
-# Your command:
+``` bash
+# Your command: like we did before 
+bash scripts/multiqc.sh
 ```
 
 <!-- You don't need to paste the MultiQC logging output -->
 
-*Answer*: Number of FastQC reports MultiQC found:
+*Answer*: Number of FastQC reports MultiQC found: 44
 
-*Answer*: Does that match what you expected? Why/why not?
+*Answer*: Does that match what you expected? Why/why not? I am unsure if I had expectations before this point. However, I did ran it by accident in Q9 and it matched that exact number, of 44 reports. So in a bias way I would say yes!
 
 ### 12: Make `multiqc.sh` accept arguments, and rerun it
 
@@ -161,8 +178,9 @@ Code to run the script:
 
 Code to rerun the script:
 
-```bash
-# Your command:
+``` bash
+# Your command: like we did before, the order matter so first input will be the results/gastqc and output results/multiqc
+bash scripts/multiqc.sh results/fastqc results/multiqc
 ```
 
 <!-- No need to paste any output -->
@@ -170,6 +188,8 @@ Code to rerun the script:
 ### 13: Differences between the two MultiQC runs
 
 *Answer*:
+
+I am not seeing difference in the overall output. It is basically the same. I loved the option were the code was more open by using variables "\$1" because I can re-use the code for many other projects without the need to fix it. But in regards for the names, I noticed there is added numbers to the reports. I think since we did it before, it done it again with a new name to avoid over writing the older draft.
 
 ------------------------------------------------------------------------
 
@@ -183,13 +203,13 @@ Code to rerun the script:
 
 ### 15: Render your README to PDF and HTML
 
-```bash
+``` bash
 pandoc -o README.pdf README.md
 ```
 
-- Command to render to HTML:
+-   Command to render to HTML:
 
-```bash
+``` bash
 # Your command:
 ```
 
@@ -227,7 +247,7 @@ pandoc -o README.pdf README.md
 
 ### 22: Pandoc versions
 
-```bash
+``` bash
 # Your command:
 ```
 
