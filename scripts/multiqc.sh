@@ -5,8 +5,8 @@ set -euo pipefail
 CONTAINER=oras://community.wave.seqera.io/library/multiqc:1.35--562c547b518ebe20
 
 # Now our input and output directories a- will be input and b- will be output
-a=results/fastqc
-b=results/multiqc
+a="$1"
+b="$2"
 
 # Based on the help command, it state we have to use multiqc then options. I actually accidently ran it in terminal in Q9 already. so i will try to redo it here with the same arguments
 apptainer exec "$CONTAINER" multiqc "$a" --outdir "$b" 
