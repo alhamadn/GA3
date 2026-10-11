@@ -124,7 +124,7 @@ The output of the command that checks the file contents was:
 ```         
 No output happened in terminal since we redirected the results to that file. However I opened that file and saw this results:
 
-S85	10dpi	relictum
+S85 10dpi   relictum
 ```
 
 ------------------------------------------------------------------------
@@ -197,9 +197,9 @@ I am not seeing difference in the overall output. It is basically the same. I lo
 
 ### 14: The structure of the Pandoc command
 
-*Answer* (options and arguments, and what each does):
+*Answer* (options and arguments, and what each does): I think the first to to call for the tool `panddoc` and then, the first is argument is the option to output what we wanted or what kind of version ..so we are saying in `-o` `README.pdf` so i think that what the output or needed file is. On the other hand, the last argument is the from argument that point out from which file, or simply it is the input `README.md`
 
-*Answer* (how does Pandoc know which output format to produce?):
+*Answer* (how does Pandoc know which output format to produce?): We can specify I think based on the argument of what comes after the dot in the first argument `-o` `README.extension`. So I think there is a help button to list this and explain it too.
 
 ### 15: Render your README to PDF and HTML
 
@@ -210,16 +210,19 @@ pandoc -o README.pdf README.md
 -   Command to render to HTML:
 
 ``` bash
-# Your command:
+# Your command: 
+pandoc -o README.html README.md
 ```
 
 ### 16: Should the rendered files be committed?
 
 *Answer*: Should the rendered files be committed to your Git repo? Why/why not?
 
+I think based on the question you stated in our GA3, we do not commit them because we want to share pdf and html to collaborators who do not have markdown. But in github, we are trying to make our directory reproducible, and lots of times we need to update `README.me` anyway. Meaning the pdf version wont be updated and need to be taken care of. So to me I think i will want my git page to be clean and simple. No pdf of html unless someone asked for it.
+
 ### 17: Install the PDF Viewer extension and view the PDF
 
-*Answer*: One observation about the rendered PDF file:
+*Answer*: One observation about the rendered PDF file: I really like how the pdf file loos like now. It colored the script part, and the notes are in green like how i am used to them in R. The sections are separated and the headers still carried the same format of size to the pdf file. Overall, it is presented well, in order and numbered pages, which would be easy to follow in a pdf format.
 
 ## Part E: Publish your repo on GitHub
 
